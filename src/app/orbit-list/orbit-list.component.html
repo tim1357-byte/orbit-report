@@ -1,0 +1,57 @@
+
+
+<h3>Orbit Report</h3>
+
+<table>
+  
+   <tr class="header-row">
+      <th class="sortable" (click)="sort('name')">Name</th>
+      <th class="sortable" (click)="sort('type')">Type</th>
+      <th>Operational</th>
+      <th>Orbit Type</th>
+      <th>Launch Date</th>
+   </tr>
+   
+   <tr *ngFor="let Satellite of satellites">{{Satellite.name}}
+      
+         <th *ngIf ="Satellite.shouldShowWarning() === true" [class.warning]="changeColor">{{Satellite.type}}</th>
+
+         <th *ngIf ="Satellite.shouldShowWarning() === false">
+               {{Satellite.type}}
+         </th>
+
+         <th>{{Satellite.operational}}</th><th>{{Satellite.orbitType}}</th><th>{{Satellite.launchDate}}</th>
+
+</table>
+
+
+
+
+<!-- <h3>Orbit Report</h3>
+
+<table>
+  
+   <tr class="header-row">
+      <th class="sortable">Name</th>
+      <th class="sortable"   [class.warning]="changeColor" >Type</th>
+      <th>Operational</th>
+      <th>Orbit Type</th>
+      <th>Launch Date</th>
+   </tr>
+   
+   <tr *ngFor="let Satellite of satellites">{{Satellite.name}}<th>{{Satellite.type}}</th><th>{{Satellite.operational}}</th><th>{{Satellite.orbitType}}</th><th>{{Satellite.launchDate}}</th>
+  
+</table> --> 
+
+
+
+  <!-- <div class='movies' *ngIf ="this.sourceList[i].shouldShowWarning() === true; else goTemplate">
+            <th class="sortable"  [class.warning]="changeColor" >Type</th>
+         </div>
+         <ng-template #goTemplate>
+               <th class="sortable">Type</th>
+         </ng-template> -->
+
+
+
+
