@@ -17,27 +17,27 @@ export class AppComponent {
   sourceList: Satellite[];
 
 
+
  constructor() {
   this.sourceList = [];
  this.displayList = [];
+// this.displayList = this.sourceList.slice(0);
  
 
   let satellitesUrl = 'https://handlers.education.launchcode.org/static/satellites.json';
-
+  
   
   window.fetch(satellitesUrl).then(function(response) {
      response.json().then(function(data) {
         let fetchedSatellites = data.satellites;
         let changeColor: boolean = false;
-        
 
         for (let i = 0; i < fetchedSatellites.length; i++) {
+         
           let newSat = new Satellite(fetchedSatellites[i].name, fetchedSatellites[i].type, fetchedSatellites[i].launchDate, fetchedSatellites[i].orbitType, fetchedSatellites[i].operational);
           this.sourceList.push(newSat);
-
-         
-
         } 
+        
         for (let i = 0; i < fetchedSatellites.length; i++) {
         if (this.sourceList[i].shouldShowWarning() === true){
           console.log("yea this is it")
@@ -47,19 +47,21 @@ export class AppComponent {
           changeColor = false;
         }
         }
-
-
-        console.log(fetchedSatellites[0]);
-        console.log(fetchedSatellites[2]);
       
+        // console.log(fetchedSatellites[0]);
+        // console.log(fetchedSatellites[2]);
+
+        this.displayList = this.sourceList.slice(0);
+        
      }  .bind(this));
   }  .bind(this));
-
+ 
   }
-
+  
   
   ngOnInit() {
   }
+
   search(searchTerm: string): void {
     let matchingSatellites: Satellite[] = [];
     searchTerm = searchTerm.toLowerCase();
@@ -67,18 +69,14 @@ export class AppComponent {
        let name = this.sourceList[i].name.toLowerCase();
        if (name.indexOf(searchTerm) >= 0) {
           matchingSatellites.push(this.sourceList[i]);
-          this.displayList = this.sourceList.slice(0);
-       
-       }
-     
-      
+          
     }
-    // assign this.displayList to be the the array of matching satellites
-    // this will cause Angular to re-make the table, but now only containing matches
-    this.displayList = matchingSatellites;
+    }
+    
+  this.displayList = matchingSatellites;
+    
+  }
 
- }
- 
 }
 
 
